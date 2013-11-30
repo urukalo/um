@@ -13,7 +13,7 @@ class controllers_index extends Controller {
         $model = $this->loadModel("index");
         $data = $model->indexModel();
 
-        //load views
+        //loadaaaaa views
         $this->loadView("header", "");
         $this->loadView("index", $data);
         $this->loadView("footer", "");
