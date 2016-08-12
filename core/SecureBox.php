@@ -6,35 +6,29 @@
  */
 
 /**
- * Description of SecureBox
+ * Description of SecureBox.
  *
  * @author Miki
  */
-class SecureBox {
-
-   
+class SecureBox
+{
     protected $target = null;
     protected $role = null;
 
-    public function __construct($target, $acl) {
+    public function __construct($target, $acl)
+    {
         $this->target = $target;
         $this->role = $acl;
     }
 
-    public function __call($method, $arguments) {
+    public function __call($method, $arguments)
+    {
         global $reg;
-         
-        if (method_exists($this->target, $method) && $this->role->inRole(get_class($this->target), $this->target->getlevel($method))) {
 
-            return call_user_func_array(array($this->target, $method), $arguments);
-        }
-        else {
-       
-        return $reg->error->f403Static("");
-        
+        if (method_exists($this->target, $method) && $this->role->inRole(get_class($this->target), $this->target->getlevel($method))) {
+            return call_user_func_array([$this->target, $method], $arguments);
+        } else {
+            return $reg->error->f403Static('');
         }
     }
-
 }
-
-?>

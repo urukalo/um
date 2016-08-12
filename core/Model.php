@@ -6,17 +6,18 @@
  */
 
 /**
- * Description of Model
+ * Description of Model.
  *
  * @author Miki
  */
-class Model extends Core {
-
-    public function __construct($option = array()) {
+class Model extends Core
+{
+    public function __construct($option = [])
+    {
         parent::__construct($option);
     }
 
-    public function indexModel($option = array('')){}
+    public function indexModel($option = [''])
+    {
+    }
 }
-
-?>

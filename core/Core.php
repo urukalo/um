@@ -6,14 +6,14 @@
  */
 
 /**
- * Description of Core
+ * Description of Core.
  *
  * @author Miki
  */
-class Core {
-
+class Core
+{
     //put your code here
-    
+
     protected $reg;
     protected $db;
     protected $option;
@@ -21,10 +21,10 @@ class Core {
     protected $user;
     protected $conf;
     protected $role;
-    private $aclLevel = array();
+    private $aclLevel = [];
 
-    public function __construct($option) {
-
+    public function __construct($option)
+    {
         global $reg;
         $this->reg = $reg;
         $this->params = $option;
@@ -35,17 +35,20 @@ class Core {
         $this->role = $reg->roles;
     }
 
-    public function addData($add) {
+    public function addData($add)
+    {
         $data = $reg->data;
         $data[] = $add;
         $reg->data = $data;
     }
-    public function setLevel($action, $level) {
-        $this->aclLevel[$action]=$level;
+
+    public function setLevel($action, $level)
+    {
+        $this->aclLevel[$action] = $level;
     }
-    public function getLevel($action) {
-        return isset($this->aclLevel[$action])?$this->aclLevel[$action]:LEVELS::DEF;
+
+    public function getLevel($action)
+    {
+        return isset($this->aclLevel[$action]) ? $this->aclLevel[$action] : LEVELS::DEF;
     }
 }
-
-?>

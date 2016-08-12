@@ -7,25 +7,28 @@
  * @Author : Miki
  */
 
-class user implements Serializable{
-
-// Informations of the user
+class user implements Serializable
+{
+    // Informations of the user
     private $userData;
     private $reg;
 
 // All informations of the member are stocked in the variable $userData
-    function __construct($id) {
+    public function __construct($id)
+    {
         global $reg;
         $this->reg = $reg;
 
         $this->insertTable($reg->userTable, $reg->userIdFild, $id);
     }
 
-    public function insertTable($table, $idTable, $id) {
-        if (!isset($id))
-            $id = "-1";
-        $q = "SELECT * FROM " . $table . " where " . $idTable . " = $id";
-        $query = mysql_query($q, $this->reg->dbcon) or die(mysql_error() . $q);
+    public function insertTable($table, $idTable, $id)
+    {
+        if (!isset($id)) {
+            $id = '-1';
+        }
+        $q = 'SELECT * FROM '.$table.' where '.$idTable." = $id";
+        $query = mysql_query($q, $this->reg->dbcon) or die(mysql_error().$q);
         while ($row = mysql_fetch_assoc($query)) {
             foreach ($row as $key => $value) {
                 $this->userData[$key] = $value;
@@ -34,57 +37,67 @@ class user implements Serializable{
     }
 
 // Get the information you need in the $name variable
-    public function __get($name) {
-        if (isset($this->userData[$name]))
+    public function __get($name)
+    {
+        if (isset($this->userData[$name])) {
             return $this->userData[$name];
-        else
+        } else {
             return 0;
+        }
     }
 
 // Change an information of the member
-    function __set($name, $value) {
+    public function __set($name, $value)
+    {
         $this->userData[$name] = $value;
     }
 
 // Check if the information is stocked or not
-    function __isset($name) {
+    public function __isset($name)
+    {
         return isset($this->userData[$name]);
     }
 
-// Delete a selected informations 
-    function __delete($name) {
+// Delete a selected informations
+    public function __delete($name)
+    {
         if (isset($this->userData[$name])) {
             unset($this->userData[$name]);
         }
     }
 
 // Update an information
-    function __update($name, $value) {
+    public function __update($name, $value)
+    {
         if ($this->userData[$name] != $value) {
             $this->userData[$name] = $value;
         }
     }
 
 // Check is an id is stocked on a session or not : if the member is logged or not
-    function loggedin() {
+    public function loggedin()
+    {
         return isset($_SESSION['userId']);
     }
-    
-    function login(){return false;}
 
-    function getRole() {
+    public function login()
+    {
+        return false;
+    }
+
+    public function getRole()
+    {
         global $roleList;
+
         return isset($this->level_member) ? $roleList[$this->level_member]['name'] : $roleList['-1'];
     }
 
-    public function serialize() {
+    public function serialize()
+    {
         return $this->userData;
     }
 
-    public function unserialize($serialized) {
-        
+    public function unserialize($serialized)
+    {
     }
-
 }
-
-?>
