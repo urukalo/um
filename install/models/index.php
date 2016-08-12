@@ -1,11 +1,8 @@
 <?php
 
-class models_index extends Model {
-
-    function indexModel() {
-        
+class models_index extends Model
+{
+    public function indexModel()
+    {
     }
-
 }
-
-?>

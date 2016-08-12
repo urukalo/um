@@ -8,15 +8,11 @@
  */
 
 
-class libs_user extends user {
-
-      function __construct($id) {
-          parent::__construct($id);
+class libs_user extends user
+{
+    public function __construct($id)
+    {
+        parent::__construct($id);
          // $this->insertTable("user_details", "userId", $id);
-      }
-
-
-    
+    }
 }
-
-?>

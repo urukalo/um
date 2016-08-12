@@ -6,37 +6,35 @@
  */
 
 /**
- * Description of Registry
+ * Description of Registry.
  *
  * @author Miki
  */
-class Registry {
+class Registry
+{
+    protected $vars = [];
 
-    protected $vars = array();
-
-    public function __set($index, $value) {
+    public function __set($index, $value)
+    {
         $this->vars[$index] = $value;
     }
 
-    public function __get($index) {
-        if (isset($this->vars[$index]))
+    public function __get($index)
+    {
+        if (isset($this->vars[$index])) {
             return $this->vars[$index];
-        else
-            return "";
+        } else {
+            return '';
+        }
     }
 
-    public function __isset($index) {
-
+    public function __isset($index)
+    {
         return @isset($this->vars[$index]);
     }
 
-    public function __unset($index) {
-
+    public function __unset($index)
+    {
         unset($this->vars[$index]);
     }
-
-   
-
 }
-
-?>

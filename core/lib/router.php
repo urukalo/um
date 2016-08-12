@@ -1,24 +1,26 @@
 <?php
 
 /**
- * parses the url to get the controlla data and save the $_URL data
+ * parses the url to get the controlla data and save the $_URL data.
  *
  * @author Miki
  */
-class router {
-    ## 
+class router
+{
+    //#
+
     /**
-     *
      * @global system $_URL
+     *
      * @param string &$controlerName
      * @param string &$viewName
      */
-
-    public function getLoadDetails(&$controllerName, &$actionName) {
+    public function getLoadDetails(&$controllerName, &$actionName)
+    {
         global $_URL, $reg;
         $filePath = explode('?', $_SERVER['REQUEST_URI']);
         $filePath = $filePath[0];
-        $filePath = explode("/", $filePath);
+        $filePath = explode('/', $filePath);
         array_shift($filePath);
 
         $controllerName = array_shift($filePath);
@@ -26,9 +28,9 @@ class router {
 
         //API URL parse addon
         if (in_array($controllerName, $reg->api)) {
-            $controllerName = $controllerName . "_" . ($actionName == "" ? "index" : $actionName);
-            $actionName = "";//$filePath[0];
-            $actionName != "" ? $actionName .= ucfirst(strtolower($_SERVER['REQUEST_METHOD'])) : $actionName = "index" . ucfirst(strtolower($_SERVER['REQUEST_METHOD'])); //Add GET/PUT/PUSH/DELETE on end of action name
+            $controllerName = $controllerName.'_'.($actionName == '' ? 'index' : $actionName);
+            $actionName = ''; //$filePath[0];
+            $actionName != '' ? $actionName .= ucfirst(strtolower($_SERVER['REQUEST_METHOD'])) : $actionName = 'index'.ucfirst(strtolower($_SERVER['REQUEST_METHOD'])); //Add GET/PUT/PUSH/DELETE on end of action name
         }
 
         for ($i = 0; $i < count($filePath); $i++) {
@@ -39,7 +41,5 @@ class router {
         }
     }
 
-    ## end of the url parser
+    //# end of the url parser
 }
-
-?>
